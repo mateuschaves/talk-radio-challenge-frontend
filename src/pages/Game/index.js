@@ -23,27 +23,23 @@ import { Container, Content, Header, GameCard, Row, Label, Ranking, RankLine, Ic
 export default function Game() {
 
     const [totalKills, setTotalKills] = useState(0);
-    const [players, setPlayers] = useState([]);
     const [kills, setKills] = useState([]);
     const [gameId, setGameId] = useState();
     const [found, setFound] = useState(false);
-
-    const [loading, setLoading] = useState(true)
 
     const { id } = useParams();
 
     useEffect(() => {
         setGameId(id);
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         if (gameId)
             getGameData(gameId)
                 .then(({ data }) => {
-                    const { total_kills, players, kills } = data;
+                    const { total_kills, kills } = data;
 
                     setTotalKills(total_kills);
-                    setPlayers(players);
                     setKills(kills);
                     setFound(true);
                 })
@@ -53,7 +49,6 @@ export default function Game() {
                     });
                     setFound(false);
                 })
-                .finally(() => setLoading(false));
         else
             setFound(false);
     }, [gameId]);
