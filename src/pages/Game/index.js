@@ -27,6 +27,7 @@ export default function Game() {
     const [players, setPlayers] = useState([]);
     const [kills, setKills] = useState([]);
     const [gameId, setGameId] = useState();
+    const [found, setFound] = useState(false);
 
     const [loading, setLoading] = useState(true)
 
@@ -45,13 +46,17 @@ export default function Game() {
                     setTotalKills(total_kills);
                     setPlayers(players);
                     setKills(kills);
+                    setFound(true);
                 })
                 .catch(error => {
                     toast('Não encontramos esse jogo ☹️', {
                         type: 'error'
                     });
+                    setFound(false);
                 })
                 .finally(() => setLoading(false));
+        else
+            setFound(false);
     }, [gameId]);
 
     function getGameData(id) {
@@ -81,40 +86,42 @@ export default function Game() {
                         onSearch={() => getGameData(gameId)}
                     />
                 </Header>
-                <GameCard>
-                    <Row>
-                        <Label>Game {gameId}</Label>
-                        <Label>{totalKills} abates</Label>
-                    </Row>
-                    <Row>
-                        <ReactSVG
-                            src={Knight}
-                            color="#FFFFFF"
-                        />
-                        <ReactSVG
-                            src={Sword}
-                            color="#FFFFFF"
-                        />
-                    </Row>
+                {found && (
+                    <GameCard>
+                        <Row>
+                            <Label>Game {gameId}</Label>
+                            <Label>{totalKills} abates</Label>
+                        </Row>
+                        <Row>
+                            <ReactSVG
+                                src={Knight}
+                                color="#FFFFFF"
+                            />
+                            <ReactSVG
+                                src={Sword}
+                                color="#FFFFFF"
+                            />
+                        </Row>
 
-                    <Ranking>
-                        {
-                            kills && kills.map((kill, position) => (
-                                <RankLine>
-                                    <Player>
-                                        {renderIcon(position)}
+                        <Ranking>
+                            {
+                                kills && kills.map((kill, position) => (
+                                    <RankLine>
+                                        <Player>
+                                            {renderIcon(position)}
+                                            <RankPlayerInfo
+                                                marginLeft={position >= 3 ? 42 : 0}
+                                            >{kill.player}</RankPlayerInfo>
+                                        </Player>
+
                                         <RankPlayerInfo
-                                            marginLeft={position >= 3 ? 42 : 0}
-                                        >{kill.player}</RankPlayerInfo>
-                                    </Player>
-
-                                    <RankPlayerInfo
-                                    >{kill.kills}</RankPlayerInfo>
-                                </RankLine>
-                            ))
-                        }
-                    </Ranking>
-                </GameCard>
+                                        >{kill.kills}</RankPlayerInfo>
+                                    </RankLine>
+                                ))
+                            }
+                        </Ranking>
+                    </GameCard>
+                )}
             </Content>
         </Container>
     )
