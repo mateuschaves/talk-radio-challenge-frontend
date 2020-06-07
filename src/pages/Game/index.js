@@ -103,10 +103,13 @@ export default function Game() {
                                 <RankLine>
                                     <Player>
                                         {renderIcon(position)}
-                                        <RankPlayerInfo>{kill.player}</RankPlayerInfo>
+                                        <RankPlayerInfo
+                                            marginLeft={position >= 3 ? 42 : 0}
+                                        >{kill.player}</RankPlayerInfo>
                                     </Player>
 
-                                    <RankPlayerInfo>{kill.kills}</RankPlayerInfo>
+                                    <RankPlayerInfo
+                                    >{kill.kills}</RankPlayerInfo>
                                 </RankLine>
                             ))
                         }

@@ -65,8 +65,8 @@ export const RankLine = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 9px;
+  margin-bottom: 9px;
 `;
 
 export const Icon = styled.img`
@@ -81,6 +81,7 @@ export const RankPlayerInfo = styled.label`
   letter-spacing: 0;
   font-weight: 500;
   text-align: left;
+  margin-left: ${props => props.marginLeft | 0}px;
 `;
 
 export const Player = styled.div`
