@@ -16,6 +16,7 @@ export default function Routes() {
                 <Route path="/ranking" exact component={Rank} />
 
                 <Route path="/game/:id" component={Game} />
+                <Route path="/game" component={Game} />
             </Switch>
         </Router>
     );

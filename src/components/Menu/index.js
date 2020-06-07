@@ -14,7 +14,7 @@ import { Container } from './styles';
 export default function Menu() {
     return (
         <Container>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+            <Link to="/game" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                 <Button
                     variant="outlined"
                     color="default"

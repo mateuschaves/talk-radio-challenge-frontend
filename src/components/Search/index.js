@@ -2,11 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,20 +25,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Search() {
+export default function Search({ onChange, onSearch }) {
     const classes = useStyles();
 
     return (
         <Paper component="form" className={classes.root}>
             <InputBase
                 className={classes.input}
-                placeholder="Search Google Maps"
-                inputProps={{ 'aria-label': 'search google maps' }}
+                placeholder="Digite o id do jogo"
+                inputProps={{ 'aria-label': 'Digite o id do jogo' }}
+                onChange={onChange}
             />
-            <IconButton type="submit" className={classes.iconButton} aria-label="search">
+            <IconButton
+                className={classes.iconButton}
+                aria-label="search"
+                onClick={onSearch}
+            >
                 <SearchIcon />
             </IconButton>
-            <Divider className={classes.divider} orientation="vertical" />
         </Paper>
     );
 }
